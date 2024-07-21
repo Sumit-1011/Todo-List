@@ -67,7 +67,7 @@ const TodoList = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen font-poppins">
+    <main className="flex flex-col items-center justify-center min-h-screen font-poppins floating">
       <div className="flex justify-between w-full max-w-md mb-4">
         <h1 className="text-5xl font-semibold">Todo List</h1>
         <button

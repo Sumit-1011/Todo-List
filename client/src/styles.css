@@ -5,8 +5,146 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+.floating {
     animation: gradient-float 10s linear infinite;
     background: linear-gradient(-45deg, #FDECEA, #E8EAF6, #E0F7F7, #FDECEA);
     background-size: 300% 300%;
+}
+
+/* Tailwind CSS base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom button styles */
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 0.8em 1.3em 0.8em 0.9em;
+    margin: 40px 0px 28px 0px;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    border: none;
+    letter-spacing: 0.05em;
+    border-radius: 16px;
+    width: 100%;
+    /* Full width button */
+}
+
+.login-button svg {
+    margin-right: 3px;
+    transform: rotate(30deg);
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.login-button span {
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.login-button:hover svg {
+    transform: translateX(5px) rotate(90deg);
+}
+
+.login-button:hover span {
+    transform: translateX(7px);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+    /* Ensure the container takes the full height of the viewport */
+    background-color: #e4eaff;
+    /* Light background for the container */
+}
+
+.form_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ccc4f7;
+    padding: 20px;
+    border: 2px solid #264143;
+    border-radius: 20px;
+    box-shadow: 3px 4px 0px 1px #302b63;
+    width: 100%;
+    max-width: 400px;
+    /* Limit the maximum width of the form area */
+}
+
+.title {
+    color: #264143;
+    font-weight: 900;
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.sub_title {
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin: 10px 0;
+    font-size: larger;
+    font-weight: 600;
+    /* Ensure equal spacing around form groups */
+}
+
+.form_style {
+    outline: none;
+    border: 2px solid #264143;
+    box-shadow: 3px 4px 0px 1px #302b63;
+    width: 100%;
+    /* Full width input fields */
+    padding: 12px 10px;
+    margin: 4px;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.form_style:focus,
+.btn:focus {
+    transform: translateY(4px);
+    box-shadow: 1px 2px 0px 0px #302b63;
+}
+
+/* .btn {
+    padding: 15px;
+    margin: 25px 0;
+    width: 100%;
+    Full width button 
+    font-size: 15px;
+    background: #DE5499;
+    border-radius: 10px;
+    font-weight: 800;
+    box-shadow: 3px 3px 0px 0px #302b63;
+    cursor: pointer;
+    Add pointer cursor on hover 
+}
+*/
+
+/* .btn:hover {
+    opacity: 0.9;
+} */
+
+.link {
+    font-weight: 800;
+    color: #264143;
+    padding: 5px;
+    cursor: pointer;
+    /* Add pointer cursor on hover */
 }
