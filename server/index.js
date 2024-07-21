@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://your-frontend-url.com", // Adjust as necessary
+    origin: "https://todo-list-61yi.onrender.com", // Adjust as necessary
   })
 );
 
