@@ -9,22 +9,25 @@ const Todo = (props) => {
     try {
       const res = await fetch(`/api/todos/${todoId}`, {
         method: "PUT",
-        body: JSON.stringify({ status: todoStatus }),
+        body: JSON.stringify({ status: !todoStatus }), // Toggle status
         headers: {
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"), // Ensure token is included
         },
       });
 
-      const json = await res.json();
-      if (json.acknowledged) {
+      if (res.ok) {
         setTodos((currentTodos) => {
           return currentTodos.map((currentTodo) => {
             if (currentTodo._id === todoId) {
-              return { ...currentTodo, status: !currentTodo.status };
+              return { ...currentTodo, status: !todoStatus };
             }
             return currentTodo;
           });
         });
+      } else {
+        const json = await res.json();
+        console.error("Failed to update todo:", json.message);
       }
     } catch (error) {
       console.error("Failed to update todo:", error);
@@ -35,14 +38,18 @@ const Todo = (props) => {
     try {
       const res = await fetch(`/api/todos/${todoId}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"), // Ensure token is included
+        },
       });
       const json = await res.json();
-      if (json.acknowledged) {
-        setTodos((currentTodos) => {
-          return currentTodos.filter(
-            (currentTodo) => currentTodo._id !== todoId
-          );
-        });
+      if (res.status === 200) {
+        setTodos((currentTodos) =>
+          currentTodos.filter((currentTodo) => currentTodo._id !== todoId)
+        );
+      } else {
+        console.error("Failed to delete todo:", json.message);
       }
     } catch (error) {
       console.error("Failed to delete todo:", error);
@@ -53,14 +60,15 @@ const Todo = (props) => {
     try {
       const res = await fetch(`/api/todos/${todoId}`, {
         method: "PUT",
-        body: JSON.stringify({ todo: editContent, status: todo.status }), // Include status to maintain its current value
+        body: JSON.stringify({ todo: editContent, status: todo.status }),
         headers: {
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
       });
 
       const json = await res.json();
-      if (json.acknowledged) {
+      if (json.modifiedCount > 0) {
         setTodos((currentTodos) => {
           return currentTodos.map((currentTodo) => {
             if (currentTodo._id === todoId) {
@@ -69,7 +77,7 @@ const Todo = (props) => {
             return currentTodo;
           });
         });
-        setIsEditing(false); // Exit edit mode after saving
+        setIsEditing(false);
       }
     } catch (error) {
       console.error("Failed to save edit:", error);
