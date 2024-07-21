@@ -12,7 +12,7 @@ function Register() {
     event.preventDefault();
 
     const response = await fetch(
-      "https://todo-list-61yi.onrender.com/api/users/register/api/users/register",
+      "https://todo-list-61yi.onrender.com/api/users/register",
       {
         method: "POST",
         headers: {
