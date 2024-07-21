@@ -6,7 +6,11 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://your-frontend-url.com", // Adjust as necessary
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public/dist")));
 app.get("/", (req, res) => {
