@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from "../config";
 
 const Todo = (props) => {
   const { todo, setTodos } = props;
@@ -7,7 +8,7 @@ const Todo = (props) => {
 
   const updateTodo = async (todoId, todoStatus) => {
     try {
-      const res = await fetch(`/api/todos/${todoId}`, {
+      const res = await fetch(`${config.apiBaseUrl}/api/todos/${todoId}`, {
         method: "PUT",
         body: JSON.stringify({ status: !todoStatus }), // Toggle status
         headers: {
@@ -36,7 +37,7 @@ const Todo = (props) => {
 
   const deleteTodo = async (todoId) => {
     try {
-      const res = await fetch(`/api/todos/${todoId}`, {
+      const res = await fetch(`${config.apiBaseUrl}/api/todos/${todoId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +59,7 @@ const Todo = (props) => {
 
   const saveEdit = async (todoId) => {
     try {
-      const res = await fetch(`/api/todos/${todoId}`, {
+      const res = await fetch(`${config.apiBaseUrl}/api/todos/${todoId}`, {
         method: "PUT",
         body: JSON.stringify({ todo: editContent, status: todo.status }),
         headers: {

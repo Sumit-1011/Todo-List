@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Add this import for navigation
 import Todo from "./Todo";
+import config from "../config";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -13,7 +14,7 @@ const TodoList = () => {
     async function getTodos() {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("/api/todos", {
+        const res = await fetch(`${config.apiBaseUrl}/api/todos`, {
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,
@@ -37,7 +38,7 @@ const TodoList = () => {
     if (content.length > 3) {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("/api/todos", {
+        const res = await fetch(`${config.apiBaseUrl}/api/todos`, {
           method: "POST",
           body: JSON.stringify({ todo: content }),
           headers: {

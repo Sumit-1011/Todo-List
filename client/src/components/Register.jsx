@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import config from "../config";
 
 function Register() {
   const navigate = useNavigate();
@@ -11,20 +12,17 @@ function Register() {
   async function registerUser(event) {
     event.preventDefault();
 
-    const response = await fetch(
-      "https://todo-list-extension.onrender.com/api/users/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      }
-    );
+    const response = await fetch(`${config.apiBaseUrl}/api/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
 
     const data = await response.json();
 
