@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const { connectToMongoDB } = require("./config/database");
-const path = require("path");
 const cors = require("cors");
 
 const allowedOrigins = [
@@ -23,20 +22,12 @@ app.use(
   })
 );
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "public/dist")));
-
 // API routes
 const todoRoutes = require("./routes/todoRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 app.use("/api/todos", todoRoutes);
 app.use("/api/users", userRoutes);
-
-// Serve the React app for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/dist/index.html"));
-});
 
 const port = process.env.PORT || 5000;
 
