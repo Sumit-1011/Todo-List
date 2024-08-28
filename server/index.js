@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://todo-list-61yi.onrender.com", // Production domain
+  "https://todo-list-extension-client.onrender.com", // Production domain
 ];
 
 const app = express();
