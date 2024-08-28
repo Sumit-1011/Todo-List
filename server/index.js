@@ -4,11 +4,22 @@ const { connectToMongoDB } = require("./config/database");
 const path = require("path");
 const cors = require("cors");
 
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://todo-list-61yi.onrender.com", // Production domain
+];
+
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://todo-list-61yi.onrender.com", // Adjust as necessary
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
@@ -33,7 +44,7 @@ async function startServer() {
   try {
     await connectToMongoDB();
     app.listen(port, () => {
-      console.log(`Server is listening on http://localhost:${port}`);
+      console.log(`Server is listening on port ${port}`);
     });
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
