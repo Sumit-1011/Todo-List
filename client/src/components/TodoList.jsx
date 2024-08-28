@@ -6,7 +6,7 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [content, setContent] = useState("");
   const [error, setError] = useState(null);
-  const [userEmail, setUserEmail] = useState(""); // State to store user email
+  //const [userEmail, setUserEmail] = useState(""); // State to store user email
   const navigate = useNavigate(); // Use navigate for navigation
 
   useEffect(() => {
